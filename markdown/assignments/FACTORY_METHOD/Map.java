@@ -4,5 +4,5 @@ public interface Map {
 
     Tile createTile();
 
-    void diaplay();
+    void display();
 }

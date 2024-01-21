@@ -4,7 +4,7 @@ public class Game {
 
     public static void main(String[] args) {
         Map map = createMap();
-        map.diaplay();
+        map.display();
     }
 
     public static Map createMap() {
