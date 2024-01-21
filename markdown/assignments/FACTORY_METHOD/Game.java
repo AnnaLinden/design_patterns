@@ -8,7 +8,7 @@ public class Game {
     }
 
     public static Map createMap() {
-        return new CityMap();
+        return new WildernessMap();
     }
 
 }
