@@ -13,8 +13,8 @@ public class Gui extends Application {
 
     public void start(Stage window) {
 
-        GuiPartFactory factory = new RabbitPicGuiPartFactory();
-        //GuiPartFactory factory = new RabbitPicGuiPartFactory();
+        // GuiPartFactory factory = new RabbitPicGuiPartFactory();
+        GuiPartFactory factory = new PacmanPicGuiPartFactory();
 
         Canvas canvas = factory.createCanvas();
         GraphicsContext gc = factory.createGraphicsContext(canvas);
@@ -26,7 +26,7 @@ public class Gui extends Application {
         character.display(gc, 100, 100);
 
         Food food = factory.createFood();
-        food.display(gc,100);
+        food.display(gc, 100);
 
         window.setScene(scene);
         window.setTitle("Game Pic");
