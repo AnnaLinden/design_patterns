@@ -1,3 +1,6 @@
-public abstract class Button {
+public abstract class Button extends UIElement {
+
+    protected String text;
+
     public abstract void display();
 }
