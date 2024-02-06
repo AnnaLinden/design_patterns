@@ -25,6 +25,7 @@ public class WeatherData extends Thread implements Subject {
 
     @Override
     public void removeObserver(WeatherObserver observer) {
+        observer.onRemove();
         observers.remove(observer);
     }
 
