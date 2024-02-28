@@ -10,7 +10,6 @@ public abstract class CharacterState {
     public abstract void train();
     public abstract void meditate();
     public abstract void fight();
-
     public abstract void displayStatusAndActions();
 
 

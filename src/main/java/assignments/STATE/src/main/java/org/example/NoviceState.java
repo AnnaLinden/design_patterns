@@ -7,8 +7,9 @@ public class NoviceState extends CharacterState{
     }
     @Override
     public void train() {
-        System.out.println("Training as a Novice.");
+        System.out.println("Training as a Novice. Experience is increased. Level is increased.");
         character.increaseExperience(10); // Assuming 10 points are gained per training session
+        character.increaseLevel();
 
         // Assuming the threshold to move from Novice to Intermediate is 50 points
         if (character.getExperiencePoints() >= 50) {
@@ -35,7 +36,6 @@ public class NoviceState extends CharacterState{
         System.out.println("Available Actions:");
         System.out.println("As a novice you can train. Upgrade to next level to be able to fight or meditate");
         // Specific instruction for NoviceState
-        System.out.println("Press '1' to train.");
-        System.out.println("2. Exit Game");
+        System.out.println("Press '1' to train or '4' to Exit the Game");
     }
 }

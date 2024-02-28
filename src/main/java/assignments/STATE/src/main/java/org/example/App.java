@@ -2,10 +2,6 @@ package org.example;
 
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -13,7 +9,8 @@ public class App {
 
         while (true) {
             character.displayStatusAndActions();
-            System.out.println("Enter your choice:");
+            System.out.println("-----------------------------------------------------------------------");
+            System.out.println("ENTER YOUR CHOICE:");
             String choice = scanner.nextLine().trim();
 
             switch (choice) {
@@ -21,18 +18,10 @@ public class App {
                     character.train();
                     break;
                 case "2":
-                    if (character.getState() instanceof IntermediateState || character.getState() instanceof ExpertState) {
-                        character.meditate();
-                    } else if (character.getState() instanceof MasterState) {
-                        System.out.println("Action not available. Please choose a valid action.");
-                    }
+                    character.meditate();
                     break;
                 case "3":
-                    if (character.getState() instanceof ExpertState) {
-                        character.fight();
-                    } else {
-                        System.out.println("Action not available. Please choose a valid action.");
-                    }
+                    character.fight();
                     break;
                 case "4":
                     System.out.println("Exiting game...");

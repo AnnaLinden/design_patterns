@@ -9,7 +9,7 @@ public class GameCharacter {
 
     public GameCharacter(String name) {
         this.name = name;
-        this.level =1;
+        this.level = 1;
         this.experiencePoints = 0;
         this.healthPoints = 100;
         this.state = new NoviceState(this);
@@ -35,6 +35,9 @@ public class GameCharacter {
     public void increaseExperience(int points) {
         this.experiencePoints += points;
         System.out.println("Current Experience: " + this.experiencePoints);
+    }
+    public void increaseLevel() {
+        this.level ++;
     }
 
     public void increaseHealth(int points) {
@@ -69,13 +72,15 @@ public class GameCharacter {
         return state;
     }
     public void displayStatusAndActions() {
+        System.out.println("-------------------------");
         System.out.println("\nCharacter Status:");
         System.out.println("Name: " + this.name);
-        System.out.println("Level: " + this.level);
+        System.out.println("Current State: " + this.state.getClass().getSimpleName().toUpperCase());
+        System.out.println("Current level: " + this.level);
         System.out.println("Experience Points: " + this.experiencePoints);
         System.out.println("Health Points: " + this.healthPoints);
-        System.out.println("Current State: " + this.state.getClass().getSimpleName());
 
         this.state.displayStatusAndActions(); // Delegate to current state
+        System.out.println("-------------------------");
     }
 }
