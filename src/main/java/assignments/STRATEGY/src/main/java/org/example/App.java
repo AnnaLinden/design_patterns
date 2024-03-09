@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 /**
  * Hello world!
  *
@@ -12,9 +14,11 @@ public class App
 
         SortingContext context = new SortingContext(new QuickSortStrategy());
         // QuickSort Timing for Small Array
+        System.out.println("Small array before sorting: " + Arrays.toString(smallArray));
         long startTime = System.nanoTime();
         context.processSorting(smallArray);
         long endTime = System.nanoTime();
+        System.out.println("Small array after sorting: " + Arrays.toString(smallArray));
         long duration1 = endTime - startTime;
         System.out.println("QuickSort took of a small array: " + duration1 + " nanoseconds or approximately: " + (duration1 / 1_000_000) + " milliseconds");
 
@@ -24,15 +28,19 @@ public class App
         long endTime2 = System.nanoTime();
         long duration2 = endTime2 - startTime2;
         System.out.println("QuickSort took of a large array: " + duration2 + " nanoseconds or approximately: " + (duration2 / 1_000_000) + " milliseconds");
+        System.out.println("___________________________________________________________________");
+
         // Switch to HeapSort and reset arrays
         context.setStrategy(new HeapSortStrategy());
         smallArray = generateRandomArray(30);
         largeArray = generateRandomArray(100000);
 
         // HeapSort Timing for Small Array
+        System.out.println("Small array before sorting: " + Arrays.toString(smallArray));
         long startTime3 = System.nanoTime();
         context.processSorting(smallArray);
         long endTime3 = System.nanoTime();
+        System.out.println("Small array after sorting: " + Arrays.toString(smallArray));
         long duration3 = endTime3 - startTime3;
         System.out.println("HeapSort took for a small array: " + duration3 + " nanoseconds or approximately: " +(endTime3 - startTime3) / 1_000_000 + " milliseconds");
 
@@ -42,15 +50,17 @@ public class App
         long endTime4 = System.nanoTime();
         long duration4 = endTime4 - startTime4;
         System.out.println("HeapSort took for a large array: "+ duration4 + " nanoseconds or approximately: " + (endTime4 - startTime4) / 1_000_000 + " milliseconds");
+        System.out.println("___________________________________________________________________");
 
         // Switch to InsertionSort and reset arrays
         context.setStrategy(new InsertionSortStrategy());
-
         smallArray = generateRandomArray(30);
         largeArray = generateRandomArray(100000);
+        System.out.println("Small array before sorting: " + Arrays.toString(smallArray));
         long startTime5 = System.nanoTime();
         context.processSorting(smallArray);
         long endTime5 = System.nanoTime();
+        System.out.println("Small array after sorting: " + Arrays.toString(smallArray));
         long duration5 = endTime5 - startTime5;
         System.out.println("InsertionSort took for a small array: "+ duration5 + " nanoseconds or approximately: " + (endTime5 - startTime5) / 1_000_000 + " milliseconds");
 
