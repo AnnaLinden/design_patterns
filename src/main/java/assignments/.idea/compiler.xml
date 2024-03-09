@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="STATE" />
         <module name="TEMPLATE_METHOD" />
+        <module name="STRATEGY" />
       </profile>
     </annotationProcessing>
   </component>
