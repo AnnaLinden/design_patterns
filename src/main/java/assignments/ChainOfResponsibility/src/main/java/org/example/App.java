@@ -10,7 +10,7 @@ public class App
         FeedbackHandler compensationHandler = new CompensationClaimHandler();
         FeedbackHandler contactRequestHandler = new ContactRequestHandler();
         FeedbackHandler developmentSuggestionHandler = new DevelopmentSuggestionHandler();
-        FeedbackHandler generalFeedbackHandler = new DevelopmentSuggestionHandler();
+        FeedbackHandler generalFeedbackHandler = new GeneralFeedbackHandler();
 
         compensationHandler.setNextHandler(contactRequestHandler);
         contactRequestHandler.setNextHandler(developmentSuggestionHandler);
