@@ -92,7 +92,12 @@ public class Gui extends Application {
 
         ListView<String> listView = new ListView<>();
         List<String> historyDescriptions = controller.getHistoryDescriptions();
-        listView.getItems().addAll(historyDescriptions);
+
+        // Include the state number in each list item
+        for (int i = 0; i < historyDescriptions.size(); i++) {
+            String descriptionWithIndex = "State " + i + ": " + historyDescriptions.get(i);
+            listView.getItems().add(descriptionWithIndex);
+        }
 
         listView.setOnMouseClicked(event -> {
             int index = listView.getSelectionModel().getSelectedIndex();
