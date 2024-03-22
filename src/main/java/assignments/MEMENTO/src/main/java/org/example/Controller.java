@@ -2,15 +2,11 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
 
 public class Controller {
     private Model model;
     private Gui gui;
-    private List<IMemento> history;
+    private List<IMemento> history; // Keeps track of all states for undo/redo
     private int currentHistoryIndex = -1; // Tracks the current position in the history
 
     public Controller(Gui gui) {
@@ -40,13 +36,21 @@ public class Controller {
     }
 
     private void saveToHistory() {
-        while (history.size() > currentHistoryIndex + 1) {
-            history.remove(history.size() - 1);
-        }
         history.add(model.createMemento());
         currentHistoryIndex++;
     }
 
+    //original undo
+//    public void undo() {
+//        if (!history.isEmpty()) {
+//            System.out.println("Memento found in history");
+//            IMemento previousState = history.remove(history.size() - 1);
+//            model.restoreState(previousState);
+//            gui.updateGui();
+//        }
+//    }
+
+    // Changed undo method to work with the current index, enabling both undo and redo functionalities
     public void undo() {
         if (currentHistoryIndex > 0) {
             currentHistoryIndex--;
@@ -63,6 +67,7 @@ public class Controller {
         }
     }
 
+    // Provides descriptions for all saved states, enabling the history view feature
     public List<String> getHistoryDescriptions() {
         List<String> descriptions = new ArrayList<>();
         for (IMemento memento : history) {
@@ -71,11 +76,11 @@ public class Controller {
         return descriptions;
     }
 
+    // Allows direct restoration of a state from the history
     public void restoreStateFromHistory(int index) {
         if (index >= 0 && index < history.size()) {
             IMemento selectedMemento = history.get(index);
             model.restoreState(selectedMemento);
-            // No change in history or current index needed for simple state restoration
             gui.updateGui();
         }
     }

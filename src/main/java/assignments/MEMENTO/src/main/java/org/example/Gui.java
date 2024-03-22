@@ -48,9 +48,12 @@ public class Gui extends Application {
 
 
         Label label = new Label("Press Ctrl-Z to undo the last change.");
+        // Label for redo functionality.
         Label labelReDo = new Label("Press Ctrl-Y to redo the last change.");
         label.setPadding(insets);
+        labelReDo.setPadding(insets);
 
+        // Button to show history.
         Button showHistoryButton = new Button("Show History");
         showHistoryButton.setOnAction(event -> showHistoryWindow());
 
@@ -86,6 +89,7 @@ public class Gui extends Application {
             }
         });
     }
+    //Displays a window with the history of states.
     public void showHistoryWindow() {
         Stage historyStage = new Stage();
         historyStage.setTitle("History");
@@ -102,6 +106,7 @@ public class Gui extends Application {
         listView.setOnMouseClicked(event -> {
             int index = listView.getSelectionModel().getSelectedIndex();
             if (index >= 0) {
+                // Allows restoring state from the selected history item.
                 controller.restoreStateFromHistory(index);
                 updateGui();
             }
