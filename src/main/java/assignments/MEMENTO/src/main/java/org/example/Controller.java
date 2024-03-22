@@ -63,26 +63,21 @@ public class Controller {
         }
     }
 
-    public void showHistoryWindow() {
-        Stage historyStage = new Stage();
-        historyStage.setTitle("History");
-
-        ListView<String> listView = new ListView<>();
-        for (int i = 0; i <= currentHistoryIndex; i++) {
-            listView.getItems().add(history.get(i).getDescription() + " (State " + i + ")");
+    public List<String> getHistoryDescriptions() {
+        List<String> descriptions = new ArrayList<>();
+        for (IMemento memento : history) {
+            descriptions.add(memento.getDescription());
         }
-
-        listView.setOnMouseClicked(event -> {
-            int index = listView.getSelectionModel().getSelectedIndex();
-            if (index >= 0 && index <= currentHistoryIndex) {
-                model.restoreState(history.get(index));
-                gui.updateGui();
-            }
-        });
-
-        VBox vbox = new VBox(listView);
-        Scene scene = new Scene(vbox, 300, 400);
-        historyStage.setScene(scene);
-        historyStage.show();
+        return descriptions;
     }
+
+    public void restoreStateFromHistory(int index) {
+        if (index >= 0 && index < history.size()) {
+            IMemento selectedMemento = history.get(index);
+            model.restoreState(selectedMemento);
+            // No change in history or current index needed for simple state restoration
+            gui.updateGui();
+        }
+    }
+
 }

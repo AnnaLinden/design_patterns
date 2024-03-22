@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.input.KeyCode;
+import java.util.List;
 
 public class Gui extends Application {
 
@@ -51,7 +52,7 @@ public class Gui extends Application {
         label.setPadding(insets);
 
         Button showHistoryButton = new Button("Show History");
-        showHistoryButton.setOnAction(event -> controller.showHistoryWindow());
+        showHistoryButton.setOnAction(event -> showHistoryWindow());
 
         // create a VBox that contains the HBox and the CheckBox
         VBox vBox = new VBox(hBox, checkBox, label, labelReDo, showHistoryButton);
@@ -59,8 +60,6 @@ public class Gui extends Application {
         checkBox.setOnAction(event -> {
             controller.setIsSelected(checkBox.isSelected());
         });
-
-
 
         // Set the HBox to be the root of the Scene
         Scene scene = new Scene(vBox);
@@ -87,7 +86,27 @@ public class Gui extends Application {
             }
         });
     }
+    public void showHistoryWindow() {
+        Stage historyStage = new Stage();
+        historyStage.setTitle("History");
 
+        ListView<String> listView = new ListView<>();
+        List<String> historyDescriptions = controller.getHistoryDescriptions();
+        listView.getItems().addAll(historyDescriptions);
+
+        listView.setOnMouseClicked(event -> {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            if (index >= 0) {
+                controller.restoreStateFromHistory(index);
+                updateGui();
+            }
+        });
+
+        VBox vbox = new VBox(listView);
+        Scene scene = new Scene(vbox, 300, 400);
+        historyStage.setScene(scene);
+        historyStage.show();
+    }
     public void updateGui() {
         // called after restoring state from a Memento
         colorBox1.setColor(controller.getOption(1));
