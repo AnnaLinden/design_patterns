@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 public class Controller {
     private Model model;
     private Gui gui;
-    private List<IMemento> history = new ArrayList<>();
+    private List<IMemento> history;
     private int currentHistoryIndex = -1; // Tracks the current position in the history
 
     public Controller(Gui gui) {
@@ -20,7 +20,7 @@ public class Controller {
     }
 
     public void setOption(int optionNumber, int choice) {
-        saveCurrentState();
+        saveToHistory();
         model.setOption(optionNumber, choice);
         gui.updateGui();
     }
@@ -30,7 +30,7 @@ public class Controller {
     }
 
     public void setIsSelected(boolean isSelected) {
-        saveCurrentState();
+        saveToHistory();
         model.setIsSelected(isSelected);
         gui.updateGui();
     }
@@ -39,8 +39,7 @@ public class Controller {
         return model.getIsSelected();
     }
 
-    private void saveCurrentState() {
-        // Remove any states ahead of the current index before adding a new state
+    private void saveToHistory() {
         while (history.size() > currentHistoryIndex + 1) {
             history.remove(history.size() - 1);
         }
